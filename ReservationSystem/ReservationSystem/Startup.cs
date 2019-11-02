@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReservationSystem.Models;
+using Microsoft.EntityFrameworkCore;
+using ReservationSystem.Data;
 
 namespace ReservationSystem
 {
@@ -24,6 +27,9 @@ namespace ReservationSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddDbContext<ReservationContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("ReservationContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
